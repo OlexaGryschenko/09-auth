@@ -1,4 +1,4 @@
-import Link from "next/link";
+// import Link from "next/link";
 import css from "@/components/Footer/Footer.module.css";
 
 const Footer = () => {

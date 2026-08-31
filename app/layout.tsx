@@ -4,6 +4,7 @@ import "modern-normalize/modern-normalize.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { Metadata } from 'next';
+import { AuthProvider } from '@/components/AuthProvider/AuthProvider';
 
 import { Roboto } from "next/font/google";
 
@@ -40,7 +41,10 @@ export const metadata: Metadata = {
 
 
 
-export default function RootLayout({ children, modal, }: Readonly<{
+export default function RootLayout({
+  children,
+  modal,
+}:Readonly<{
   children: React.ReactNode;
   modal: React.ReactNode;
 }>) {
@@ -48,14 +52,17 @@ export default function RootLayout({ children, modal, }: Readonly<{
     <html lang="en" suppressHydrationWarning>
       <body className={`${roboto.variable}`}>
         <TanStackProvider>
+          <AuthProvider>
           <Header />
 
-          <main>
+          <main>            
             {children}
+
             {modal}
           </main>
 
           <Footer />
+          </AuthProvider>
         </TanStackProvider>
       </body>
     </html>
