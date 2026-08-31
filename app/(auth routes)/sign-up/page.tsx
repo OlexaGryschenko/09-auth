@@ -1,9 +1,11 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import type { User } from '@/types/user';
+
 import css from "./SignUpPage.module.css"
 import { useAuthStore } from '@/lib/store/authStore';
+import type { User } from '@/types/user';
+
 import { useMutation } from '@tanstack/react-query';
 import { register } from '@/lib/api/clientApi';
 
@@ -14,7 +16,7 @@ import { register } from '@/lib/api/clientApi';
 export default function SignUpPage() {
 
 const router = useRouter();
-  const setUser = useAuthStore((state) => state.setUser);
+const setUser = useAuthStore((state) => state.setUser);
 
   const mutation = useMutation({
     mutationFn: register,

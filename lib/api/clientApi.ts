@@ -22,6 +22,10 @@ export interface FetchNotesParams {
   tag?: string;
 }
 
+export interface UpdateProfilePayload {
+  username: string;
+}
+
 // 2. Використання Omit
 export type NewNote = Omit<Note, "id" | "createdAt" | "updatedAt">;
 
@@ -85,7 +89,7 @@ export const getMe = async () => {
   return data;
 };
 
-export const updateMe = async (payload: Partial<User>) => {
-  const { data } = await api.patch<User>('/users/me', payload);
+export const updateMe = async (payload: UpdateProfilePayload): Promise<User> => {
+  const { data } = await api.patch<User>('/auth/me', payload); 
   return data;
 };

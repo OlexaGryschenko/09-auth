@@ -40,13 +40,37 @@ export const fetchNoteById = async (id: string): Promise<Note> => {
 };
 
 export const getMe = async (): Promise<User> => {
-  const headers = await getAuthHeaders();
-  const { data } = await api.get<User>('/users/me', { headers });
-  return data;
+  const cookieStore = cookies();
+  const cookieString = cookieStore.toString();
+
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, {
+    headers: {
+      Cookie: cookieString,
+    },
+    cache: 'no-store',
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch user profile');
+  }
+
+  return response.json();
 };
 
-export const checkSession = async (): Promise<User | null> => {
-  const headers = await getAuthHeaders();
-  const { data } = await api.get<User>('/auth/session', { headers });
-  return data;
+export const checkSession = async (): Promise<User> => {
+  const cookieStore = cookies();
+  const cookieString = cookieStore.toString();
+
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/session`, {
+    headers: {
+      Cookie: cookieString,
+    },
+    cache: 'no-store',
+  });
+
+  if (!response.ok) {
+    throw new Error('Not authenticated');
+  }
+
+  return response.json();
 };
