@@ -1,4 +1,4 @@
-// middleware.ts
+// proxy.ts
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { checkSession } from '@/lib/api/serverApi';
@@ -18,7 +18,7 @@ export async function proxy(request: NextRequest) {
     if (isPublicRoute) {
       return NextResponse.redirect(new URL('/profile', request.url));
     }
-  } catch (error) {
+  } catch {
     if (isPrivateRoute) {
       return NextResponse.redirect(new URL('/sign-in', request.url));
     }
