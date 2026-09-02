@@ -58,10 +58,10 @@ export const getMe = async (): Promise<User> => {
 };
 
 export const checkSession = async (): Promise<User> => {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const cookieString = cookieStore.toString();
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/session`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/session`, {
     headers: {
       Cookie: cookieString,
     },

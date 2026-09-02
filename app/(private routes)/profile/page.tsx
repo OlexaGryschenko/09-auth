@@ -12,10 +12,8 @@ import css from './EditProfilePage.module.css';
 export default function EditProfilePage() {
   const router = useRouter();
   
-  const { user, setUser } = useAuthStore((state) => ({
-    user: state.user,
-    setUser: state.setUser,
-  }));
+  const user = useAuthStore((state) => state.user);
+  const setUser = useAuthStore((state) => state.setUser);
 
   const mutation = useMutation({
     mutationFn: updateMe,
@@ -41,7 +39,7 @@ export default function EditProfilePage() {
         <h1 className={css.formTitle}>Edit Profile</h1>
 
         <Image
-          src={user.avatar || '/default-avatar.png'}
+          src={user.avatar || '/default-avatar.svg'}
           alt="User Avatar"
           width={120}
           height={120}

@@ -36,7 +36,7 @@ const setUser = useAuthStore((state) => state.setUser);
   };
 
 
-return (     
+/* return (     
 
 <main className={css.mainContent}>
   <h1 className={css.formTitle}>Sign up</h1>
@@ -61,5 +61,54 @@ return (
   </form>
 </main>
 
-)
+) */
+
+// ... (імпорти та логіка компонента залишаються без змін)
+
+  return (
+    <main className={css.mainContent}>
+      <form className={css.form} onSubmit={handleSubmit}>
+        <h1 className={css.formTitle}>Sign up</h1>
+        
+        <div className={css.formGroup}>
+          <label htmlFor="email">Email</label>
+          <input 
+            id="email" 
+            type="email" 
+            name="email" 
+            autoComplete="email"
+            className={css.input} 
+            required 
+          />
+        </div>
+
+        <div className={css.formGroup}>
+          <label htmlFor="password">Password</label>
+          <input 
+            id="password" 
+            type="password" 
+            name="password" 
+            autoComplete="new-password"
+            className={css.input} 
+            required 
+          />
+        </div>
+
+        <div className={css.actions}>
+          <button 
+            type="submit" 
+            className={css.submitButton}
+            disabled={mutation.isPending}
+          >
+            {mutation.isPending ? 'Registering...' : 'Register'}
+          </button>
+        </div>
+
+        {mutation.isError && (
+          <p className={css.error}>Registration failed</p>
+        )}
+      </form>
+    </main>
+  );
 }
+
