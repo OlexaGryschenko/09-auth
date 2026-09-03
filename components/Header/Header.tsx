@@ -1,8 +1,14 @@
 import Link from "next/link";
 import css from "@/components/Header/Header.module.css";
 import { AuthNavigation } from '@/components/AuthNavigation/AuthNavigation';
+import { useAuthStore } from '@/lib/store/authStore';
+
 
 const Header = () => {
+  // Виводимо стан прямо всередині тіла компонента, 
+  // щоб бачити його актуальне значення при кожному рендері
+  console.log('Zustand isAuthenticated:', useAuthStore.getState().isAuthenticated);
+  console.log('Zustand User:', useAuthStore.getState().user);
   return (
     <header className={css.header}>
       <Link href="/" aria-label="Home">

@@ -18,10 +18,11 @@ import Link from 'next/link';
 
   const logoutMutation = useMutation({
     mutationFn: logout,
-    onSuccess: () => {
+    onSettled: () => {
       clearIsAuthenticated();
       queryClient.clear();
       router.push('/sign-in');
+      router.refresh();
     },
   });
 

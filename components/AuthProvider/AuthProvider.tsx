@@ -22,7 +22,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (isError) {
       clearIsAuthenticated();
     }
-  }, [isSuccess, isError, user, setUser, clearIsAuthenticated]);
+  },
+  
+  [isSuccess, isError, user, setUser, clearIsAuthenticated]
+);
 
-  return <>{children}</>;
+  return(<>{children}</>);
 };

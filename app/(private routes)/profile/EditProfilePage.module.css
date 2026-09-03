@@ -73,3 +73,59 @@
 .editProfileButton:hover {
   background-color: #0b5ed7;
 }
+
+/*    ,,,,,       */
+
+/* Додай ці класи до свого EditProfilePage.module.css */
+
+.input {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 250px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 12px;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.saveButton,
+.cancelButton {
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.saveButton {
+  background-color: #0d6efd;
+  color: #fff;
+  border: none;
+}
+
+.saveButton:hover:not(:disabled) {
+  background-color: #0b5ed7;
+}
+
+.saveButton:disabled {
+  background-color: #6ea8fe;
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ced4da;
+}
+
+.cancelButton:hover:not(:disabled) {
+  background-color: #f8f9fa;
+}

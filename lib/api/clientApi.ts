@@ -2,6 +2,7 @@
 import type { Note } from "@/types/note"; 
 import { api } from './api';
 import type { User } from "@/types/user";
+import axios from "axios";
 
 
 export interface RegisterPayload {
@@ -74,10 +75,16 @@ export const login = async (payload: AuthPayload): Promise<User> => {
   return data;
 };
 
+/* export const logout = async () => {
+  const { data } = await api.post('/auth/logout');
+  return data;
+}; */ 
+
 export const logout = async () => {
   const { data } = await api.post('/auth/logout');
   return data;
 };
+
 
 export const checkSession = async () => {
   const { data } = await api.get<User>('/auth/session');
