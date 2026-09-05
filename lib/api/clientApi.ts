@@ -81,7 +81,8 @@ export const login = async (payload: AuthPayload): Promise<User> => {
 }; */ 
 
 export const logout = async () => {
-  const { data } = await api.post('/auth/logout');
+  // Використовуємо axios напряму, щоб гарантовано вдарити по локальному роуту Next.js
+  const { data } = await axios.post('/api/auth/logout');
   return data;
 };
 

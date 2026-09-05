@@ -16,7 +16,7 @@ import Link from 'next/link';
   // Отримуємо стан авторизації та дані юзера зі стора
   const { isAuthenticated, clearIsAuthenticated } = useAuthStore();
 
-  const logoutMutation = useMutation({
+  /* const logoutMutation = useMutation({
     mutationFn: logout,
     onSettled: () => {
       clearIsAuthenticated();
@@ -24,7 +24,29 @@ import Link from 'next/link';
       router.push('/sign-in');
       router.refresh();
     },
-  });
+  }); */
+
+  
+const logoutMutation = useMutation({
+  mutationFn: logout,
+
+  onSuccess: () => {
+    console.log('LOGOUT SUCCESS');
+
+    clearIsAuthenticated();
+    queryClient.clear();
+    router.push('/sign-in');
+    router.refresh();
+  },
+
+  onError: (error) => {
+    console.log('LOGOUT ERROR:', error);
+  },
+});
+
+
+
+
 
     return (
     <>

@@ -6,6 +6,9 @@ import { useQuery } from '@tanstack/react-query';
 import { checkSession } from '@/lib/api/clientApi';
 import { useAuthStore } from '@/lib/store/authStore';
 
+
+
+
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { setUser, clearIsAuthenticated } = useAuthStore();
 

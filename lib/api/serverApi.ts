@@ -10,6 +10,11 @@ export interface FetchNotesParams {
   tag?: string;
 }
 
+export type SessionResponse = {
+  success: boolean;
+};
+
+
 const getAuthHeaders = async () => {
   const cookieStore = await cookies();
   return {
@@ -57,16 +62,19 @@ export const getMe = async (): Promise<User> => {
   return response.json();
 };
 
-export const checkSession = async (): Promise<User> => {
+export const checkSession = async (): Promise<SessionResponse> => {
   const cookieStore = await cookies();
   const cookieString = cookieStore.toString();
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/session`, {
-    headers: {
-      Cookie: cookieString,
-    },
-    cache: 'no-store',
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/auth/session`,
+    {
+      headers: {
+        Cookie: cookieString,
+      },
+      cache: 'no-store',
+    }
+  );
 
   if (!response.ok) {
     throw new Error('Not authenticated');
