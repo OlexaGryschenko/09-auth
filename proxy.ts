@@ -20,8 +20,12 @@ export async function proxy(request: NextRequest) {
   let isAuthenticated = false;
 
   try {
-    const session = await checkSession();
-    isAuthenticated = session.success;
+    const response = await checkSession();
+    
+    // Перевіряємо, чи об'єкт існує і чи не є він { success: false }
+    if (response && response.success !== false) {
+      isAuthenticated = true;
+    }
   } catch {
     isAuthenticated = false;
   }

@@ -27,6 +27,10 @@ export interface UpdateProfilePayload {
   username: string;
 }
 
+export interface SessionErrorResponse {
+  success: boolean;
+}
+
 // 2. Використання Omit
 export type NewNote = Omit<Note, "id" | "createdAt" | "updatedAt">;
 
@@ -88,8 +92,22 @@ export const logout = async () => {
 
 
 export const checkSession = async () => {
-  const { data } = await api.get<User>('/auth/session');
-  return data;
+  // Використовуємо any, оскільки бекенд може повернути User або { success: false }
+  const { data } = await api.get<User | SessionErrorResponse>('/auth/session', {
+    headers: {
+      'Cache-Control': 'no-cache',
+      'Pragma': 'no-cache',
+    },
+    params: {
+      t: Date.now(),
+    },
+  });
+
+  if ('success' in data && data.success === false) {
+    throw new Error('Unauthorized');
+  }
+
+  return data as User;
 };
 
 export const getMe = async () => {
